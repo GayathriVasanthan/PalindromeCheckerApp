@@ -1,21 +1,32 @@
-public class PalindromeCheckerApp {
+ import java.util.Deque;
+import java.util.LinkedList;
 
+    public class PalindromeCheckerApp {
 
         public static void main(String[] args) {
 
-            String original = "string";
-            String reversed = "";
+            String word = "civic";
+            Deque<Character> deque = new LinkedList<>();
 
-            for (int i = original.length() - 1; i >= 0; i--) {
-                reversed = reversed + original.charAt(i);
+            for (int i = 0; i < word.length(); i++) {
+                deque.addLast(word.charAt(i));
             }
 
-            if (original.equals(reversed)) {
-                System.out.println(original + " is a Palindrome.");
+            boolean isPalindrome = true;
+            while (deque.size() > 1) {
+                if (!deque.removeFirst().equals(deque.removeLast())) {
+                    isPalindrome = false;
+                    break;
+                }
+            }
+
+            if (isPalindrome) {
+                System.out.println(word + " is a Palindrome.");
             } else {
-                System.out.println(original + " is NOT a Palindrome.");
+                System.out.println(word + " is NOT a Palindrome.");
             }
         }
+
     }
 
 
