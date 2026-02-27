@@ -1,21 +1,67 @@
 public class PalindromeCheckerApp {
 
 
-        public static void main(String[] args) {
-
-            String original = "string";
-            String reversed = "";
-
-            for (int i = original.length() - 1; i >= 0; i--) {
-                reversed = reversed + original.charAt(i);
-            }
-
-            if (original.equals(reversed)) {
-                System.out.println(original + " is a Palindrome.");
-            } else {
-                System.out.println(original + " is NOT a Palindrome.");
+        static class Node {
+            char data;
+            Node next;
+            Node(char data) {
+                this.data = data;
+                this.next = null;
             }
         }
+
+        public static void main(String[] args) {
+
+            String word = "level";
+            Node head = null;
+            Node tail = null;
+
+            for (int i = 0; i < word.length(); i++) {
+                Node newNode = new Node(word.charAt(i));
+                if (head == null) {
+                    head = newNode;
+                    tail = newNode;
+                } else {
+                    tail.next = newNode;
+                    tail = newNode;
+                }
+            }
+
+            Node slow = head;
+            Node fast = head;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            Node prev = null;
+            Node curr = slow;
+            while (curr != null) {
+                Node nextTemp = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = nextTemp;
+            }
+
+            Node firstHalf = head;
+            Node secondHalf = prev;
+            boolean isPalindrome = true;
+            while (secondHalf != null) {
+                if (firstHalf.data != secondHalf.data) {
+                    isPalindrome = false;
+                    break;
+                }
+                firstHalf = firstHalf.next;
+                secondHalf = secondHalf.next;
+            }
+
+            if (isPalindrome) {
+                System.out.println(word + " is a Palindrome.");
+            } else {
+                System.out.println(word + " is NOT a Palindrome.");
+            }
+        }
+
     }
 
 
