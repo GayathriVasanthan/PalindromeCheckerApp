@@ -1,6 +1,5 @@
 public class PalindromeCheckerApp {
 
-
         private static final String APP_NAME = "Palindrome Checker App";
         private static final String APP_VERSION = "Version 1.0";
 
